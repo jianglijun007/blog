@@ -1,0 +1,122 @@
+<div class="xl12 xm4">
+	<div>
+		<h3><span class="icon-user"></span> 用户登录</h3>
+		<br />
+		<form method="post" class="form-x form-auto">
+	<div class="form-group">
+		<div class="label">
+			<label for="username">
+				用户名</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input input-auto" id="username" name="username" size="30" data-validate="required:必填" placeholder="手机/邮箱/账号" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="label">
+			<label for="detail">
+				密&nbsp;&nbsp;码</label>
+		</div>
+		<div class="field">
+			<input type="text" class="input input-auto" id="username" name="username" size="30" data-validate="required:必填" placeholder="密码" />
+		</div>
+	</div>
+	<div class="form-button">
+		<button class="button bg-blue shake-hover" type="submit">登录</button>
+	</div>
+</form>
+	</div>
+	<hr />
+	<div>
+		<h3><span class="icon-wrench"></span> 我的标签</h3>
+		
+		<h4>
+			<div class="tag-ul">
+                <volist name="tag" id="v" empty="暂时没有标签">
+                	
+                    <if condition="$v['a_id'] % 6 ==1">
+                        <a class="button button-little bg-main shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                    <if condition="$v['a_id'] % 6 ==2">
+                        <a class="button button-little bg-sub shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                    <if condition="$v['a_id'] % 6 ==3">
+                        <a class="button button-little bg-red shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                    <if condition="$v['a_id'] % 6 ==4">
+                        <a class="button button-little bg-yellow shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                    <if condition="$v['a_id'] % 6 ==5">
+                        <a class="button button-little bg-blue shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                    <if condition="$v['a_id'] % 6 ==0">
+                        <a class="button button-little bg-green shake-hover" href="{:U('Article/index',array('a_id'=>$v['a_id']))}">{$v.a_keyword}</a>
+                    </if>
+                </volist>
+            </div>			
+		</h4>
+	</div>
+	<hr />
+	<div class="tab border-main" data-toggle="hover" style="height: 470px;">
+		<div class="tab-head">
+
+			<ul class="tab-nav">
+				<li class="active"><a href="#tab-start2">最新留言</a> </li>
+				<li><a href="#tab-css2">最多点击</a> </li>
+			</ul>
+		</div>
+		<div class="tab-body ">
+			<div class="tab-panel active" id="tab-start2">				
+				<volist name="Liuyan" id="vo">
+					<div class="panel-group" style="border-top: solid 0px #ddd;">
+						<div class="media media-x">
+							<a class="float-left" href="{:U('Liuyan/index')}">
+								<img src="{$vo.photo}" class="radius-circle" width="60px" height="60px">
+							</a>
+							<div class="media-body">
+								<strong><span class="icon-paper-plane"></span>  {$vo.username}</strong>
+								<span class="tag bg-dot">{$vo.from}</span> {$vo.content}
+							</div>
+						</div>
+					</div>
+				</volist>								
+			</div>
+			<div class="tab-panel" id="tab-css2" >
+				<volist name="hits" id="v">
+					<li style="margin-bottom:8px"><h4>
+					<a href="{:U('Article/index',array('a_id'=>$v['a_id']))}"><span class="icon-leaf"></span> {$v.a_title}({$v.a_views})</a>
+					</h4></li>
+				</volist>
+			</div>
+		</div>
+	</div>
+	<div>
+	<hr/>
+		<h3><span class="icon-retweet"></span> 友情链接</h3>
+		<br />
+		<div class="links">
+			<volist name="link" id="vo">
+				<a href="{$vo.url}" target="_blank" class="button border-blue ring-hover" role="button">{$vo.name}</a>&nbsp;
+			</volist>
+		</div>
+	</div>
+	<br />
+	
+</div>
+
+	<script>
+	
+		$(function(){
+		    $('#download').click(function(){
+		    	var node ="{$qqname}";
+
+		    	if( node =='' || node == null){ 
+					layer.alert("请您使用QQ登录后下载!",{icon: 2,}); 
+					return false;
+				}
+
+				 return true;
+		    });		    
+		})
+
+	</script>
